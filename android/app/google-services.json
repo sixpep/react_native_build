@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "363648521086",
+    "project_id": "test-app-ece52",
+    "storage_bucket": "test-app-ece52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363648521086:android:877717dc9870fdaa70992f",
+        "android_client_info": {
+          "package_name": "com.react_native_firebase_integration"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqax-uthGAmxJSSFydK43fuw6bqnqyETc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
