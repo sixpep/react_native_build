@@ -97,7 +97,7 @@ const App = () => {
 
   useEffect(() => {
     // Connect to the backend server (use your server's IP and port)
-    const socket = io('http://10.0.2.2:3001');
+    const socket = io('http://10.0.2.2:3000');
 
     // When connected, this will run
     socket.on('connect', () => {
@@ -300,7 +300,6 @@ const App = () => {
             </View>
           )}
         </View> */}
-
         <ScrollView contentContainerStyle={styles.numsContainer}>
           {nums.map((num, index) => (
             <View style={styles.tile} key={index}>
