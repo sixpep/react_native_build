@@ -122,6 +122,13 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.4.0")) 
     // Firebase Analytics
     implementation("com.google.firebase:firebase-analytics")
+
+    
+    implementation project(':react-native-push-notification') // Manuall Added RNPT
+
+    //Push Notification
+    implementation 'androidx.core:core:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {

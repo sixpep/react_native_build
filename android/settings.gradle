@@ -4,3 +4,8 @@ extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autoli
 rootProject.name = 'react_native_firebase_integration'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
+
+
+include ':react-native-push-notification'
+project(':react-native-push-notification').projectDir = file('../node_modules/react-native-push-notification/android')
+// Manually added RNPT
