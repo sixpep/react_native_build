@@ -20,7 +20,7 @@ class NotificationStore {
   constructor() {
     PushNotification.configure({
       onRegister: function (token) {
-        // console.log('TOKEN:', token);
+        console.log('TOKEN:', token);
       },
       onNotification: function (notification) {
         console.log('NOTIFICATION:', notification);
@@ -69,31 +69,6 @@ const App = () => {
   const [ws, setWs] = useState(null);
   const [message, setMessage] = useState('');
   const [nums, setNums] = useState([]);
-
-  // useEffect(() => {
-  //   // Replace 'your-server-ip-or-domain' with the correct IP or domain of your server
-  //   const socket = new WebSocket('ws://10.0.2.2:3001');
-
-  //   socket.onopen = () => {
-  //     console.log('WebSocket connected');
-  //     setWs(socket);
-  //   };
-
-  //   socket.onmessage = event => {
-  //     console.log('Message from server:', event);
-  //     console.log('event.data :', event.data);
-  //     setMessage(event.data);
-  //   };
-
-  //   socket.onclose = () => {
-  //     console.log('WebSocket connection closed');
-  //   };
-
-  //   // Cleanup WebSocket connection when component unmounts
-  //   return () => {
-  //     socket.close();
-  //   };
-  // }, []);
 
   useEffect(() => {
     // Connect to the backend server (use your server's IP and port)
@@ -187,9 +162,12 @@ const App = () => {
 
   const sendToken = async () => {
     try {
-      const resp = await axios.post('http://10.0.2.2:3000/send-notification', {
-        retrievedToken: FCMToken,
-      });
+      const resp = await axios.post(
+        'http://13.201.230.15:3000/send-notification',
+        {
+          token: FCMToken,
+        },
+      );
       console.log(resp);
     } catch (error) {
       console.log(error);
@@ -308,6 +286,10 @@ const App = () => {
             </View>
           ))}
         </ScrollView>
+        <TouchableOpacity style={styles.button} onPress={sendToken}>
+          <Text style={styles.btnText}>Register</Text>
+        </TouchableOpacity>
+
         {/* <Button title="Send Message" onPress={sendMessage} /> */}
       </ImageBackground>
     </View>
@@ -404,4 +386,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  button: {
+    backgroundColor: '#375B9D',
+    padding: 20,
+    borderRadius: 5,
+  },
+  btnText: {
+    textAlign: 'center',
+    color: 'white',
+  }, //
 });
