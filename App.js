@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
+  Image,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import auth, {firebase} from '@react-native-firebase/auth';
@@ -15,6 +16,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import messaging from '@react-native-firebase/messaging';
 import axios from 'axios';
 import {io} from 'socket.io-client';
+import FlashMessage, {showMessage} from 'react-native-flash-message';
 
 class NotificationStore {
   constructor() {
@@ -72,7 +74,8 @@ const App = () => {
 
   useEffect(() => {
     // Connect to the backend server (use your server's IP and port)
-    const socket = io('http://10.0.2.2:3000');
+    // const socket = io('http://10.0.2.2:3000');
+    const socket = io('http://13.201.230.15:3000');
 
     // When connected, this will run
     socket.on('connect', () => {
@@ -225,6 +228,39 @@ const App = () => {
     }
   };
 
+  const showSuccessMsg = () => {
+    showMessage({
+      message: `Successfully showing!!!`,
+      description: 'The Description of the message!!',
+      type: 'success',
+      icon: props => (
+        <Image
+          source={{uri: 'https://picsum.photos/200'}}
+          {...props}
+          style={{height: '100%', width: '20%', marginRight: 20}}
+        />
+      ),
+    });
+  };
+  const showFailedMsg = () => {
+    showMessage({
+      message: `Failed!!!`,
+      description: 'This is the Description!!',
+      type: 'danger',
+      icon: props => (
+        <Image
+          source={{
+            uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD6QLTqvQEiiiCFJszRikVtn2_4HbHEbSQTA&s',
+          }}
+          {...props}
+          style={{height: '100%', width: '20%', marginRight: 20}}
+        />
+      ),
+    });
+  };
+
+  console.log('App Executed!!');
+
   return (
     <View style={styles.container}>
       {/* <TextInput
@@ -285,12 +321,30 @@ const App = () => {
             </View>
           ))}
         </ScrollView>
-        <TouchableOpacity style={styles.button} onPress={sendToken}>
-          <Text style={styles.btnText}>Register</Text>
-        </TouchableOpacity>
+        <View style={styles.btnWrapMain}>
+          <View style={styles.btnWrap}>
+            <TouchableOpacity style={styles.button} onPress={showSuccessMsg}>
+              <Text style={styles.btnText}>Success</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={showFailedMsg}>
+              <Text style={styles.btnText}>Failed</Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={sendToken}>
+            <Text style={styles.btnText}>Show Push Notification</Text>
+          </TouchableOpacity>
+        </View>
 
         {/* <Button title="Send Message" onPress={sendMessage} /> */}
       </ImageBackground>
+      <FlashMessage
+        position={'top'}
+        style={{
+          width: '100%',
+          height: 100,
+          alignItems: 'center',
+        }}
+      />
     </View>
   );
 };
@@ -385,9 +439,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  btnWrapMain: {
+    gap: 5,
+  },
+  btnWrap: {
+    gap: 5,
+    flexDirection: 'row',
+  },
   button: {
     backgroundColor: '#375B9D',
     padding: 20,
+    width: '50%',
     borderRadius: 5,
   },
   btnText: {
