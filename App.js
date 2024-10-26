@@ -323,10 +323,12 @@ const App = () => {
         </ScrollView>
         <View style={styles.btnWrapMain}>
           <View style={styles.btnWrap}>
-            <TouchableOpacity style={styles.button} onPress={showSuccessMsg}>
+            <TouchableOpacity
+              style={styles.successBtn}
+              onPress={showSuccessMsg}>
               <Text style={styles.btnText}>Success</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={showFailedMsg}>
+            <TouchableOpacity style={styles.failedBtn} onPress={showFailedMsg}>
               <Text style={styles.btnText}>Failed</Text>
             </TouchableOpacity>
           </View>
@@ -449,11 +451,23 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#375B9D',
     padding: 20,
-    width: '50%',
+    width: '100%',
     borderRadius: 5,
   },
   btnText: {
     textAlign: 'center',
     color: 'white',
-  }, //
+  },
+  successBtn: {
+    backgroundColor: 'rgb(25, 135, 84)',
+    padding: 20,
+    width: '50%',
+    borderRadius: 5,
+  },
+  failedBtn: {
+    backgroundColor: 'rgb(220, 53, 69)',
+    padding: 20,
+    width: '50%',
+    borderRadius: 5,
+  },
 });
